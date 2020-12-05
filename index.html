@@ -1452,14 +1452,15 @@
         /></div
     ></noscript> -->
     <!-- /Yandex.Metrika counter -->
-    <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- <script src="../ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://code.jivosite.com/widget/Dd3OVmKDwo" async></script>
     <script
       defer
       src="wp-content/cache/autoptimize/js/autoptimize_a4a4deb3d3ba9bc39912c7b8d66741a8.js"
     ></script>
     <script>
-      var activities = document.getElementById("from");
+        var activities = document.getElementById("from");
 
         activities.addEventListener("click", function() {
           debugger;
@@ -1483,6 +1484,43 @@
           debugger;
             // ... Code to add item here
         }
+
+        $(".form-calculator").submit(function () {
+            var phoneLn = $(this).find('input[type="tel"]').val().length;
+            if ((phoneLn < 9) || (phoneLn > 12)) {
+                alert('Номер телефона не полный, укажите правильный!');
+            } else {
+            var formElements = $(this).serializeArray();
+            //Prepare message
+            let message = ['🚕 Новый заказ!'];
+            formElements.forEach((e) => {
+                message.push(`${e.name} = ${e.value}`);
+            })
+
+            $.ajax({
+                type: 'POST',
+                url: "https://taxi-krim.herokuapp.com/notify",
+                data: { message: message.join('\n') },
+                success: function (msg) {
+                    if(msg && msg.description){
+                        $('.rez_calc').html('Что-то пошло не так.<br>' + msg.description);
+                        $('.rez_calc').addClass('min').slideDown('slow');
+                    } else {
+                        $(".form-calculator").slideUp('slow');
+                        $('.rez_calc').html('Мы приняли ваш заказ, ожидайте звонка!');
+                        $('.rez_calc').removeClass('min').slideDown('slow');
+                        ym(60744085, 'reachGoal', 'zakaz'); //is it right ym id ???                        
+                    }
+                },
+                failure: function(errMsg){
+                    $('.rez_calc').html('Что-то пошло не так.<br>' + errMsg);
+                    $('.rez_calc').addClass('min').slideDown('slow');
+                }
+            });
+          }
+          return false;
+        });
+
     </script>
   </body>
 </html>

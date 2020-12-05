@@ -1229,31 +1229,7 @@ jQuery(document).ready(function ($) {
     }
   });
   $('.input_check').styler();
-  $(".form-calculator").submit(function () {
-    var phoneLn = $(this).find('input[type="tel"]').val().length;
-    if ((phoneLn < 9) || (phoneLn > 12)) {
-      alert('Номер телефона не полный, укажите правильный!');
-    } else {
-      var str = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: "contact.php",
-        data: str,
-        success: function (msg) {
-          if (msg == 'ok') {
-            $(".form-calculator").slideUp('slow');
-            $('.rez_calc').html('Мы приняли ваш заказ, ожидайте звонка!');
-            $('.rez_calc').removeClass('min').slideDown('slow');
-            ym(60744085, 'reachGoal', 'zakaz');
-          } else {
-            $('.rez_calc').html('возможно вы не указали телефон, проверьте правильность заполненных полей');
-            $('.rez_calc').addClass('min').slideDown('slow');
-          }
-        }
-      });
-    }
-    return false;
-  });
+
   $(".modal form").submit(function () {
     var phoneLn = $(this).find('input[type="tel"]').val().length;
     var yad = $(this).attr('data-yad');
