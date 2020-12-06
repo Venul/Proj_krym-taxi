@@ -1,5 +1,4 @@
 ! function (e) {
-  debugger;
   "function" == typeof define && define.amd ? define(["jquery"], e) : "object" == typeof exports ? module.exports = e($ || require("jquery")) : e(jQuery)
 }(function (e) {
   "use strict";
@@ -1161,6 +1160,7 @@ jQuery(document).ready(function ($) {
     $('.modal').removeClass('show');
   });
   $(".priceForm").on("change", "select", function (e) {
+    debugger
     e.preventDefault();
     var a = $(this);
     setTimeout(function () {
@@ -1188,18 +1188,16 @@ jQuery(document).ready(function ($) {
             case 5:
               o = t.price5
           }
-        }), o ? ($("#tax").text(o.slice(0, -2)), $('.cost_transfer').val(o.slice(0, -2))) : ($("#tax").text('такого маршрута нет 0'))
+        }), o ? ($("#tax").text(o + "₽"), $('.cost_transfer').val(o)) : ($("#tax").text('Готового рассчета нет. Уточните у оператора'))
       }
     }, 10)
   }), 
   $.getJSON(
-  "price.json", function(event) {debugger;}
+  "price.json", function(event) {}
   ).done(function (e) {
-    debugger;
     "" != e && (i = e)
-  }).fail(function (e, a, r) {debugger;}), 
+  }).fail(function (e, a, r) {}), 
   $(".priceForm").on("click", "#orderfromprice", function (e) {
-    debugger;
     s = $("#from :selected").text(), o = $("#to :selected").text(), n = $("#class :selected").text(), c = parseFloat($("#tax").text().replace(/\s/g, ""))
   });
   $(".radio_span span").click(function () {
@@ -1229,59 +1227,6 @@ jQuery(document).ready(function ($) {
     }
   });
   $('.input_check').styler();
-  $(".form-calculator").submit(function () {
-    var phoneLn = $(this).find('input[type="tel"]').val().length;
-    if ((phoneLn < 9) || (phoneLn > 12)) {
-      alert('Номер телефона не полный, укажите правильный!');
-    } else {
-      var str = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: "contact.php",
-        data: str,
-        success: function (msg) {
-          if (msg == 'ok') {
-            $(".form-calculator").slideUp('slow');
-            $('.rez_calc').html('Мы приняли ваш заказ, ожидайте звонка!');
-            $('.rez_calc').removeClass('min').slideDown('slow');
-            ym(60744085, 'reachGoal', 'zakaz');
-          } else {
-            $('.rez_calc').html('возможно вы не указали телефон, проверьте правильность заполненных полей');
-            $('.rez_calc').addClass('min').slideDown('slow');
-          }
-        }
-      });
-    }
-    return false;
-  });
-  $(".modal form").submit(function () {
-    var phoneLn = $(this).find('input[type="tel"]').val().length;
-    var yad = $(this).attr('data-yad');
-    if ((phoneLn < 9) || (phoneLn > 12)) {
-      alert('Номер телефона не полный, укажите правильный!');
-    } else {
-      var str = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: "order.php",
-        data: str,
-        success: function (msg) {
-          if (msg == 'ok') {
-            $(".modal form input").not(':button, :submit, :reset, :hidden').val('');
-            $('.modal__close').click();
-            $('.modal3').addClass('show');
-            ym(60744085, 'reachGoal', yad);
-            setTimeout(function () {
-              $('.modal__close').click();
-            }, 3000);
-          } else {
-            alert('возможно вы не указали телефон, проверьте правильность заполненных полей');
-          }
-        }
-      });
-    }
-    return false;
-  });
   $('.auto__col-car').slick({
     infinite: true,
     slidesToShow: 1,
