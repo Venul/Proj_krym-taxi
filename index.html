@@ -9,7 +9,7 @@
       name="viewport"
     />
     <meta name="keywords" content="такси в Крыму" />
-    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <script src="https://kit.fontawesome.com/bcce145cba.js" crossorigin="anonymous"></script>
     <link media="all" href="src/css/style.css" rel="stylesheet" />
     <title>Такси в Крыму</title>
   </head>
@@ -336,6 +336,7 @@
                 <div class="price_col">
                   <textarea
                     name="message"
+                    id="textmessage"
                     placeholder="Пожелания к заказу"
                   ></textarea>
                 </div>
@@ -1204,44 +1205,9 @@
         <div class="img-circleblock" style="transform-origin: center"></div>
       </div>
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script defer src="src/js/script.js"></script>
-    <script>
-        $(".form-calculator").submit(function () {
-          var phoneLn = $(this).find('input[type="tel"]').val().length;
-          if ((phoneLn < 9) || (phoneLn > 12)) {
-              alert('Номер телефона не полный, укажите правильный!');
-          } else {
-          var formElements = $(this).serializeArray();
-          //Prepare message
-          let message = ['🚕 Новый заказ!'];
-          formElements.forEach((e) => {
-              message.push(`${e.name} = ${e.value}`);
-          })
-
-          $.ajax({
-              type: 'POST',
-              url: "https://taxi-krim.herokuapp.com/notify",
-              data: { message: message.join('\n') },
-              success: function (msg) {
-                  if(msg && msg.description){
-                      $('.rez_calc').html('Что-то пошло не так.<br>' + msg.description);
-                      $('.rez_calc').addClass('min').slideDown('slow');
-                  } else {
-                      $(".form-calculator").slideUp('slow');
-                      $('.rez_calc').html('Мы приняли ваш заказ, ожидайте звонка!');
-                      $('.rez_calc').removeClass('min').slideDown('slow');
-                  }
-              },
-              failure: function(errMsg){
-                  $('.rez_calc').html('Что-то пошло не так.<br>' + errMsg);
-                  $('.rez_calc').addClass('min').slideDown('slow');
-              }
-          });
-        }
-        return false;
-      });
-    </script>
-  
+    <script defer src="src/js/sendMsg.js"></script>
   </body>
 </html>

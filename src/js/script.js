@@ -1160,7 +1160,6 @@ jQuery(document).ready(function ($) {
     $('.modal').removeClass('show');
   });
   $(".priceForm").on("change", "select", function (e) {
-    debugger
     e.preventDefault();
     var a = $(this);
     setTimeout(function () {
