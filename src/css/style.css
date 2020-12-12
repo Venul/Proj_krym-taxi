@@ -5399,7 +5399,7 @@ h1 {
   position: relative;
 }
 .auto h3 span:before,
-.reazon__title span:before,
+.reazon__title span:before,J
 .pay__title span:before,
 .exc__title span:before,
 .hello-title span:before {
@@ -5409,7 +5409,6 @@ h1 {
   width: 100%;
   left: 0;
   bottom: 1px;
-  background: #0014a5;
   z-index: -1;
 }
 .auto__col-title {
@@ -5446,7 +5445,7 @@ h1 {
 }
 .auto__col-car {
   padding: 0;
-  background: #313131;
+  background: #0014a5;
   border-radius: 30px;
   max-width: 230px;
   margin: 10px auto;
@@ -5549,7 +5548,7 @@ footer {
 .footer__col-title {
   padding-bottom: 20px;
   text-transform: uppercase;
-  color: #0014a5;
+  color: #ffffff;
 }
 .footer__col-link span {
   font-size: 14px;
@@ -6052,7 +6051,7 @@ footer {
   padding: 10px 0 40px;
 }
 #reazon {
-  background: #313131;
+  background: #0014a5;
   padding: 70px 0 90px;
 }
 .reazon {
@@ -6082,7 +6081,7 @@ footer {
 }
 .r-options__title {
   font-weight: 700;
-  color: #0014a5;
+  color: #fff;
 }
 .r-options__desc {
   padding: 10px 0 0;
